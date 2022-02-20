@@ -21,7 +21,9 @@ This code needs to be cross-compiled to work on STM32 microcontroller, which is 
 
 
 In order to cross-compile, you'll need to add target used for this microcontroller <b>thumbv7em-none-eabihf</b>, using following command
-```rustup target add thumbv7em-none-eabihf```
+```
+rustup target add thumbv7em-none-eabihf
+```
 
 As stated in the book, I also installed, cargo-binutils and cargo-generate.
 More details can be found [here](https://docs.rust-embedded.org/book/intro/install.html).
@@ -31,7 +33,9 @@ On the same page you can also find OS-Specific instructions for installing follo
 - ST-LINK usb driver
 
 Once all of these are installed, you can very installation is working with following command:
-```openocd -f interface/stlink.cfg -f target/stm32f4x.cfg```
+```
+openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
+```
 Something along the following output should be produced:
 ```
 ...
@@ -56,7 +60,9 @@ Since the project uses HAL and smart-led crates as stated above, they are listed
 ### Building project
 
 With all properly configured, project can be simply built using following command
-```cargo build --release```
+```
+cargo build --release
+```
 -- release flag here was needed in my case, without this flag, the project didn't work correctly.
 
 ### Running project
@@ -67,20 +73,30 @@ OpenOCD serves as an intermediate between GDB and ST-LINK and GDB itself is used
 
 Following are the command I use on my windows setup, it should be very similar for linux:
 - first run openOCD: 
-```openocd -f interface/stlink.cfg -f target/stm32f4x.cfg```
+    ```
+    openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
+    ```
 - then run GDB. Following is command executed in root of project:
-    ```arm-none-eabi-gdb -q .\target\thumbv7em-none-eabihf\release\stm32f411-rust-neopixel```
+    ```
+    arm-none-eabi-gdb -q .\target\thumbv7em-none-eabihf\release\stm32f411-rust-neopixel
+    ```
 
 This now opens GDB. It can be used to debug code, or in this case just load it and run the project.
 
 First write te following to connect with openOCD:
-```target remote :3333```
+```
+target remote :3333
+```
 
 Then to load the project:
-```load```
+```
+load
+```
 
 And at this point, if you just want to run it:
-```continue```
+```
+continue
+```
 
 Now the onboard led should turn on and the ledstrip should have a rainbow animation.
 

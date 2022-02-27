@@ -1,6 +1,6 @@
-# STM32F411CE (blackpill) ws2812 ledstrip
+# STM32F411CE (blackpill) ws2812 ledstrip project written in Rust
 
-This project is an example of running ws2812b ledstrip on STM32F411CE also know as blackpill, using Rust. Implementation uses SPI, so data line needs to be connected to pin A7, this of course can be changed if you want to use SPI2 etc.
+This project is an example of running ws2812 ledstrip on STM32F411CE also know as blackpill, using Rust. Implementation uses SPI, so data line needs to be connected to pin A7, this of course can be changed if you want to use SPI2 etc.
 I'll also try to write down some general data, how to get it to run on microcontroller.
 
 To get started with embedded rust, there's a really good book: [The Embedded Rust Book ](https://docs.rust-embedded.org/book/intro/index.html), I really recommend reading at least first few chapters as it describes how to get entire toolchain up and running. If you want, you can skip most of it, by using [probe-run](https://github.com/knurling-rs/probe-run) which enables flashing and running the code as if it was normal rust code.
@@ -32,7 +32,7 @@ Using probe-run is simpler and quicker, but you can always use GDB as well.
 
 Following are the setup instructions for either option, you don't need both.
 
-#### Probe-run
+### Probe-run
 
 Probe run enables you to run the code on microcontroller, as if it was normal rust code. More info about it can be found in [probe-run repo](https://github.com/knurling-rs/probe-run).
 
@@ -45,7 +45,7 @@ If that doesn't work, refer to repo linked above. You might also need a ST-LINK 
 
 Once you have probe-run installed you can run code as described in one of the sections bellow, config file already contains setting for probe-run and stm32f411CEU blackpill.
 
-#### GDB & OpenOCD
+### GDB & OpenOCD
 
 Everything about installation and details about tools are explained in [The Embedded Rust Book, section Tooling and Installation
 ](https://docs.rust-embedded.org/book/intro/tooling.html)Following is a quick overview.
@@ -72,7 +72,7 @@ Info : Listening on port 3333 for gdb connections
 ```
 If it is not working, please refer to [following page](https://docs.rust-embedded.org/book/intro/install/verify.html).
 
-### Project settings
+## Project settings
 
 For project to work correctly with HAL and given microcontroller, you'll also need <b>[.cargo/config](https://github.com/blaz-r/STM32F411-rust-neopixel/tree/main/.cargo/config)</b> and <b>[memory.x](https://github.com/blaz-r/STM32F411-rust-neopixel/tree/main/memory.x)</b> files. These are already present in this project and set up for blackpill.
 - Config file is used to select the right target for building and in order for linker to work correctly. It also provides command for probe-run.
@@ -80,7 +80,7 @@ For project to work correctly with HAL and given microcontroller, you'll also ne
 
 Since the project uses HAL and smart-led crates as stated above, they are listed in [Cargo.toml](https://github.com/blaz-r/STM32F411-rust-neopixel/tree/main/Cargo.toml) under dependencies. There's also some other dependencies needed, more information about these can be found in above mentioned book and HAL repo.
 
-### Building project
+## Building project
 
 With everything properly configured, project can be simply built using following command
 ```
